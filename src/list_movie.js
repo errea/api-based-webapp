@@ -1,57 +1,33 @@
-const container = document.getElementById('movieList');
-const baseApi = 'https://api.tvmaze.com/search/shows?q=action';
-
-const appData = [{
-    title: "title1",
-    description: "desc1",
-    output: "out1"
-  }, {
-    title: "title2",
-    description: "desc2",
-    output: "out2"
-  }, {
-    title: "title3",
-    description: "desc3",
-    output: "out3"
-  }];
+import { getMovies } from './moviesApi.js';
+import { displayCommentPopup } from './comments.js';
   
-
-appData.forEach((result, idx) => {
-    // Create list
-    const card = document.createElement('div');
-    card.classList = 'card-body';
-  
-    const content = `
-    <div class="card">
-        <div class="card-body">
-            <h5>${result.title}</h5>
-            <button data-id ${result.output}>Comments</button>
-            <button>${result.output}</button>
+  const displayMovies = async () => {
+    const movies = await getMovies();
+    const movieList = document.getElementById('movie-list');
+    movieList.innerHTML = "";
+    movies.forEach((movie) => {
+      let image = movie.show.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
+      movieList.insertAdjacentHTML('beforeend', ` 
+      <div class="movie-list-container">
+        <div class="movie-listcontent">
+          <img src="${image}" />
         </div>
-  </div>
-  `;
+          <div>
+            <h2>${movie.show.name}</h2>
+          </div>
+          <button data-id="${movie.show.id}" class="btn-comments">Comments</button>
+      </div>`
+      );
+      const button = document.querySelectorAll(`[data-id="${movie.show.id}"]`)[0];
+      button.addEventListener('click', (e) => {
+        const movieId = e.target.getAttribute('data-id');
+        displayCommentPopup(movieId);
+        
+      });
+    });
+  }
 
-  // Append newyly created card element to the container
-  container.innerHTML += content;
-})
-
-
-export const displayList = async (e) => {
-    e.preventDefault();
-    // const input = document.querySelectorAll('input');
-    const response = await fetch(
-      `${baseApi}`,
-      {
-        method: 'GET',
-        body: JSON.stringify({
-       
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      },
-    );
-  };
+  export { displayMovies };
   
 
   
