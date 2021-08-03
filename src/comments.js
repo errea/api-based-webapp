@@ -8,7 +8,7 @@ const displayCommentPopup = async (id) => {
 
 const generatePopupContent = (movie) => {
   const popup = document.getElementById('popup');
-  
+  document.body.style.backgroundColor = "rgba(0,0,0,0.6)";
   popup.innerHTML = "";
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
@@ -33,6 +33,7 @@ const generatePopupContent = (movie) => {
   const closeButton = document.getElementsByClassName('close-popup')[0];
   closeButton.addEventListener('click', () => {
     popup.style.display = "none";
+    document.body.style.backgroundColor = "rgba(0,0,0,0)";
   })
 }
 
