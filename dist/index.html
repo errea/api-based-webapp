@@ -1,12 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<script defer src="index.bundle.js"></script></head>
-<body>
-    <script src="main.js"></script>
-</body>
-</html>
+<head><script defer src="index.bundle.js"></script></head>Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Module not found: Error: Can't resolve '/img/logo.png'' in '/Users/eri/microverse/Javascript/api-based-webapp/src'
+  ModuleNotFoundError: Module not found: Error: Can't resolve '/img/logo.png'' in '/Users/eri/microverse/Javascript/api-based-webapp/src'
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/Compilation.js:1771:28
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:748:13
+      at eval (eval at create (/Users/eri/microverse/Javascript/api-based-webapp/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:8:1)
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:278:22
+      at eval (eval at create (/Users/eri/microverse/Javascript/api-based-webapp/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:7:1)
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:408:22
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:120:11
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:654:24
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:819:8
+      at /Users/eri/microverse/Javascript/api-based-webapp/node_modules/webpack/lib/NormalModuleFactory.js:939:5
+  
+  - Compilation.js:1771 
+    [api-based-webapp]/[webpack]/lib/Compilation.js:1771:28
+  
+  - NormalModuleFactory.js:748 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:748:13
+  
+  
+  - NormalModuleFactory.js:278 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:278:22
+  
+  
+  - NormalModuleFactory.js:408 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:408:22
+  
+  - NormalModuleFactory.js:120 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:120:11
+  
+  - NormalModuleFactory.js:654 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:654:24
+  
+  - NormalModuleFactory.js:819 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:819:8
+  
+  - NormalModuleFactory.js:939 
+    [api-based-webapp]/[webpack]/lib/NormalModuleFactory.js:939:5
+  
+  - child-compiler.js:169 
+    [api-based-webapp]/[html-webpack-plugin]/lib/child-compiler.js:169:18
+  
+  - Compiler.js:548 
+    [api-based-webapp]/[webpack]/lib/Compiler.js:548:11
+  
+  - Compiler.js:1118 
+    [api-based-webapp]/[webpack]/lib/Compiler.js:1118:17
+  
+  
+  - Hook.js:18 Hook.CALL_ASYNC_DELEGATE [as _callAsync]
+    [api-based-webapp]/[tapable]/lib/Hook.js:18:14
+  
+  - Compiler.js:1114 
+    [api-based-webapp]/[webpack]/lib/Compiler.js:1114:33
+  
+  - Compilation.js:2252 finalCallback
+    [api-based-webapp]/[webpack]/lib/Compilation.js:2252:11
+  
+  - Compilation.js:2543 
+    [api-based-webapp]/[webpack]/lib/Compilation.js:2543:11
+  
+  
+  - Hook.js:18 Hook.CALL_ASYNC_DELEGATE [as _callAsync]
+    [api-based-webapp]/[tapable]/lib/Hook.js:18:14
+  
+</pre>
