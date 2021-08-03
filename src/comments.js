@@ -10,11 +10,12 @@ const generatePopupContent = (movie) => {
   const popup = document.getElementById('popup');
   document.body.style.backgroundColor = "rgba(0,0,0,0.6)";
   popup.innerHTML = "";
+  let image = movie.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg'
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
       <div class="inner-content">
         <div class="photo-close">
-          <img src="${movie.image.medium}" />
+          <img src="${image}" />
           <span type="button" class="close-popup"><i class="fas fa-times fa-2x"></i></span>
         </div>
         <h2>${movie.name}</h2>
