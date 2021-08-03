@@ -12,12 +12,12 @@ const generatePopupContent = (movie) => {
   popup.innerHTML = "";
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
-      <div class="inner-content>
+      <div class="inner-content">
         <div class="photo-close">
           <img src="${movie.image.medium}" />
-          <input type="button" class="close-popup"><i class="fas fa-times"></i>
+          <span type="button" class="close-popup"><i class="fas fa-times fa-2x"></i></span>
         </div>
-        <h3>${movie.name}</h3>
+        <h2>${movie.name}</h2>
         <div class="movie-description-1">
           <p>Type: ${movie.type}</p>
           <p>Language: ${movie.language}</p>
@@ -26,9 +26,14 @@ const generatePopupContent = (movie) => {
           <p>Status: ${movie.status}</p>
           <p>Premiered: ${movie.premiered}</p>
         </div>
-      <div>
+      </div>
     </div>`
   );
+  popup.style.display = "block";
+  const closeButton = document.getElementsByClassName('close-popup')[0];
+  closeButton.addEventListener('click', () => {
+    popup.style.display = "none";
+  })
 }
 
 export { displayCommentPopup }

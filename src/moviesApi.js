@@ -4,7 +4,7 @@ const actionMoviesBaseURL = "https://api.tvmaze.com/shows/";
 const getMovies = async () => {
   const results = await fetch(searchActionMoviesURL);
   
-  const movies = await result.json();
+  const movies = await results.json();
   return movies;
 }
 
