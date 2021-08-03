@@ -21,6 +21,23 @@ body {
   height: 100px;
 }
 
+/* ---------- Popup ----------- */
+
+.popup-container {
+  border: 2px solid black;
+  margin: 15px;
+  padding: 25px;
+}
+
+.photo-close {
+  display: flex;
+}
+
+.photo-close img {
+  width: 400px;
+  height: auto;
+}
+
 footer { 
   position: absolute;
   bottom: 0;
