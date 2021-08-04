@@ -21,6 +21,13 @@ body {
   height: 100px;
 }
 
+#movie-list{
+  display: flex;
+}
+
+.movie-list-container {
+  margin: 25px;
+}
 /* ---------- Popup ----------- */
 .popup-filter {
 	z-index: 9;
