@@ -58,7 +58,8 @@ body {
   padding-bottom: 15px;
 }
 
-.inner-content h2 {
+.inner-content h2,
+.inner-content h3 {
   text-align: center;
 }
 
