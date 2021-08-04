@@ -1,24 +1,18 @@
 import { getMovieById } from './moviesApi.js';
-import { getComments } from './involvementApi.js'
-
-const displayCommentPopup = async (id) => {
-  const movie = await getMovieById(id);
-
-  generatePopupContent(movie);
-}
+import { getComments } from './involvementApi.js';
 
 const generatePopupContent = async (movie) => {
   const popup = document.getElementById('popup');
-  document.body.style.backgroundColor = "rgba(0,0,0,0.6)";
-  popup.innerHTML = "";
-  let image = movie.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg'
-  
-  const movieId = movie.id; 
+  document.body.style.backgroundColor = 'rgba(0,0,0,0.6)';
+  popup.innerHTML = '';
+  const image = movie.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
+
+  const movieId = movie.id;
   const comments = await getComments(movieId);
-  
-  let commentBlock = "";
-  commentBlock += `<h3>Comments</h3>`;
-  comments.forEach(comment => {
+
+  let commentBlock = '';
+  commentBlock += '<h3>Comments</h3>';
+  comments.forEach((comment) => {
     const date = new Date();
     const dateFormated = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
     commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
@@ -43,14 +37,18 @@ const generatePopupContent = async (movie) => {
           ${commentBlock}
         <div>
       </div>
-    </div>`
-  );
-  popup.style.display = "block";
+    </div>`);
+  popup.style.display = 'block';
   const closeButton = document.getElementsByClassName('close-popup')[0];
   closeButton.addEventListener('click', () => {
-    popup.style.display = "none";
-    document.body.style.backgroundColor = "rgba(0,0,0,0)";
-  })
-}
+    popup.style.display = 'none';
+    document.body.style.backgroundColor = 'rgba(0,0,0,0)';
+  });
+};
 
-export { displayCommentPopup }
+const displayCommentPopup = async (id) => {
+  const movie = await getMovieById(id);
+  generatePopupContent(movie);
+};
+
+export { displayCommentPopup };
