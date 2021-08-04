@@ -40,4 +40,4 @@ import { addLike, getLikes } from './likes_api.js';
   export { displayMovies };
   
 
-  
+export { displayMovies };
