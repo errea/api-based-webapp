@@ -1,5 +1,5 @@
 import './style.css';
-import displayMovies from './list_movie.js';
+import { displayMovies } from './list_movie.js';
 
 import '@fortawesome/fontawesome-free/js/fontawesome.js';
 import '@fortawesome/fontawesome-free/js/solid.js';
