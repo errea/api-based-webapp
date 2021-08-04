@@ -3,7 +3,7 @@ import { displayCommentPopup } from './comments.js';
 import { addLike, getLikes } from './likes_api.js';
 
   
-  const displayMovies = async () => {
+  export const displayMovies = async () => {
     const movies = await getMovies();
     const movieList = document.getElementById('movie-list');
     movieList.innerHTML = "";
@@ -36,8 +36,3 @@ import { addLike, getLikes } from './likes_api.js';
       });
     };
   }
-
-  export { displayMovies };
-  
-
-export { displayMovies };
