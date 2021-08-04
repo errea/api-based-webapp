@@ -27,12 +27,20 @@ import { addLike, getLikes } from './likes_api.js';
             <p>${numberOfLikes}</p>
           </div>
           <button data-id="${movie.show.id}" class="btn-comments">Comments</button>
+          <button like-btn="${movie.show.id}" class="btn-likes"><i class="fas fa-heart"></i></button>
       </div>`
       );
       const button = document.querySelectorAll(`[data-id="${movie.show.id}"]`)[0];
       button.addEventListener('click', (e) => {
         const movieId = e.target.getAttribute('data-id');
         displayCommentPopup(movieId);
+
+        const like_btn = document.querySelectorAll(`[like-btn="${movie.show.id}"]`)[0];
+        like_btn.addEventListener('click', (e) => {
+        const movieId = e.target.getAttribute('like-btn');
+        addLike(movieId);
+        
+      });
       });
     };
   }
