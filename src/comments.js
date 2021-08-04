@@ -1,5 +1,5 @@
 import { getMovieById } from './moviesApi.js';
-import { getComments } from './involvementApi.js';
+import { getComments, createComment } from './involvementApi.js';
 
 const generatePopupContent = async (movie) => {
   const popup = document.getElementById('popup');
@@ -11,12 +11,16 @@ const generatePopupContent = async (movie) => {
   const comments = await getComments(movieId);
 
   let commentBlock = '';
-  commentBlock += '<h3>Comments</h3>';
-  comments.forEach((comment) => {
-    const date = new Date();
-    const dateFormated = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
-    commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
-  });
+
+  if (comments.length > 0) {
+    commentBlock += '<h3>Comments</h3>';
+    comments.forEach((comment) => {
+      const date = comment.creation_date.split('-');
+      const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
+      commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
+    });
+  }
+
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
       <div class="inner-content">
@@ -35,7 +39,13 @@ const generatePopupContent = async (movie) => {
         </div>
         <div class="comments-display">
           ${commentBlock}
-        <div>
+        </div>
+        <div class="comment-create">
+          <h3>Add a comment</h3>
+          <input name="username" placeholder="Your name" />
+          <textarea name="insights" rows="6">Your insights</textarea>
+          <button comment-id="${movie.id}" class="btn-add-comment">Comment</button>
+        </div>
       </div>
     </div>`);
   popup.style.display = 'block';
@@ -44,6 +54,37 @@ const generatePopupContent = async (movie) => {
     popup.style.display = 'none';
     document.body.style.backgroundColor = 'rgba(0,0,0,0)';
   });
+
+  const commentButton = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0];
+  commentButton.addEventListener('click', async (e) => {
+    const commentObject = {
+      item_id: Number(e.target.getAttribute('comment-id')),
+      username: commentButton.previousElementSibling.previousElementSibling.value,
+      comment: commentButton.previousElementSibling.value,
+    };
+
+    const result = await createComment(commentObject);
+
+    if (result === 201) {
+      const comments = await getComments(movieId);
+      const lastComment = comments[comments.length - 1];
+      const commentsDisplay = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0]
+        .parentElement.previousElementSibling;
+      const date = lastComment.creation_date.split('-');
+      const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
+
+      if (comments.length === 1) {
+        commentsDisplay.insertAdjacentHTML('beforeend', `
+          <h3>Comments</h3>
+          <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
+        `);
+      } else {
+        commentsDisplay.insertAdjacentHTML('beforeend', `
+          <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
+        `);
+      }
+    }
+  });
 };
 
 const displayCommentPopup = async (id) => {
@@ -51,4 +92,4 @@ const displayCommentPopup = async (id) => {
   generatePopupContent(movie);
 };
 
-export { displayCommentPopup };
+export default displayCommentPopup;
