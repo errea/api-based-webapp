@@ -39,7 +39,7 @@ const generatePopupContent = async (movie) => {
         </div>
         <div class="comments-display">
           ${commentBlock}
-        <div>
+        </div>
         <div class="comment-create">
           <h3>Add a comment</h3>
           <input name="username" placeholder="Your name" />
@@ -64,11 +64,18 @@ const generatePopupContent = async (movie) => {
     }
     
     const result = await createComment(commentObject);
-    console.log(result);
 
-    //if (result === 201) {
-      // "refresh" the comments section
-    //}
+    if (result === 201) {
+      const comments = await getComments(movieId);
+      const lastComment = comments[comments.length - 1];
+      const commentsDisplay = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0]
+        .parentElement.previousElementSibling;
+      const date = lastComment.creation_date.split('-');
+      const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
+      commentsDisplay.insertAdjacentHTML('beforeend', `
+        <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
+      `);
+    }
   });
 };
 
