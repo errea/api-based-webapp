@@ -11,12 +11,16 @@ const generatePopupContent = async (movie) => {
   const comments = await getComments(movieId);
 
   let commentBlock = '';
-  commentBlock += '<h3>Comments</h3>';
-  comments.forEach((comment) => {
-    const date = new Date();
-    const dateFormated = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
-    commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
-  });
+  
+  if (comments.length > 0) {
+    commentBlock += '<h3>Comments</h3>';
+    comments.forEach((comment) => {
+      const date = new Date();
+      const dateFormated = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
+      commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
+    });
+  }
+  
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
       <div class="inner-content">
@@ -36,6 +40,12 @@ const generatePopupContent = async (movie) => {
         <div class="comments-display">
           ${commentBlock}
         <div>
+        <div class="comment-create">
+          <h3>Add a comment</h3>
+          <input name="username" placeholder="Your name" />
+          <textarea name="insights" rows="6">Your insights</textarea>
+          <button comment-id="${movie.id}" class="btn-add-comment">Comment</button>
+        </div>
       </div>
     </div>`);
   popup.style.display = 'block';
@@ -43,6 +53,12 @@ const generatePopupContent = async (movie) => {
   closeButton.addEventListener('click', () => {
     popup.style.display = 'none';
     document.body.style.backgroundColor = 'rgba(0,0,0,0)';
+  });
+
+  const commentButton = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0];
+  commentButton.addEventListener('click', (e) => {
+    const movieId = e.target.getAttribute('data-id');
+    displayCommentPopup(movieId);
   });
 };
 

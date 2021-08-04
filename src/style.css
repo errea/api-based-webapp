@@ -69,6 +69,21 @@ body {
   justify-content: space-between;
 }
 
+.comment-create {
+  display: flex;
+  flex-direction: column;
+}
+
+input[name="username"] {
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+.btn-add-comment {
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
 footer {
   position: absolute;
   bottom: 0;
