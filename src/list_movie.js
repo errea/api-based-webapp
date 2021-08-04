@@ -1,5 +1,5 @@
 import { getMovies } from './moviesApi.js';
-import { displayCommentPopup } from './comments.js';
+import displayCommentPopup from './comments.js';
 import { addLike, getLikes } from './likes_api.js';
 
   
@@ -50,3 +50,4 @@ import { addLike, getLikes } from './likes_api.js';
       });
     };
   }
+
