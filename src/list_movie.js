@@ -24,6 +24,12 @@ import { displayCommentPopup } from './comments.js';
         displayCommentPopup(movieId);
         
       });
+      const like_btn = document.querySelectorAll(`[like-btn="${movie.show.id}"]`)[0];
+      like_btn.addEventListener('click', (e) => {
+        const movieId = e.target.getAttribute('like-btn');
+        displayCommentPopup(movieId);
+        
+      });
     });
   }
 
