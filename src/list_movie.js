@@ -10,10 +10,8 @@ import { addLike, getLikes } from './likes_api.js';
     for (const movie of movies) {
       const likes = await getLikes(movie.show.id);
       const likeObject = likes.filter(like => like.item_id === movie.show.id);
-      console.log(likeObject);
       let numberOfLikes = '';
       if (likeObject.length > 0) {
-        console.log(likeObject[0].likes);
         numberOfLikes = `${likeObject[0].likes} likes`;
       }
       let image = movie.show.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
@@ -37,11 +35,17 @@ import { addLike, getLikes } from './likes_api.js';
       });
       const likeBtn = document.querySelectorAll(`[like-id="${movie.show.id}"]`)[0];
       likeBtn.addEventListener('click', async (e) => {
-        const movieId = e.target.getAttribute('like-id');
-        const status = await addLike(movieId);
-
+        const movieId = e.target.parentElement.parentElement.getAttribute('like-id');
+        const status = await addLike(Number(movieId));
+        const newLikes = await getLikes(movieId);
+        console.log(newLikes)
+        const newLikesObject = newLikes.filter(like => like.item_id === movie.show.id);
+        const numberOfLikes = `${newLikesObject[0].likes} likes`;
+        console.log(numberOfLikes);
         if (status === 201) {
-          
+          const likeDisplay = likeBtn.previousElementSibling.previousElementSibling.children[1];
+          console.log(likeDisplay);
+          likeDisplay.innerText = numberOfLikes;
         }
       });
     };
