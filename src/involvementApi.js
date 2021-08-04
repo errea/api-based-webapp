@@ -2,13 +2,13 @@ const moviesAppCode = '6XTY5c5cttB49FIPrzzY';
 
 const commentsURL = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${moviesAppCode}/comments`;
 
-const createComment = async (id, username, comment) => {
+const createComment = async (obj) => {
   const commentBody = {
-    item_id: id,
-    username,
-    comment,
+    "item_id": obj.item_id,
+    "username": obj.username,
+    "comment": obj.comment,
   };
-
+  console.log(commentBody);
   const results = await fetch(commentsURL, {
     method: 'POST',
     headers: {
@@ -18,6 +18,7 @@ const createComment = async (id, username, comment) => {
   });
 
   const status = await results.json();
+  console.log(status);
   return status;
 };
 

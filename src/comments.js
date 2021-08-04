@@ -1,5 +1,5 @@
 import { getMovieById } from './moviesApi.js';
-import { getComments } from './involvementApi.js';
+import { getComments, createComment } from './involvementApi.js';
 
 const generatePopupContent = async (movie) => {
   const popup = document.getElementById('popup');
@@ -56,9 +56,19 @@ const generatePopupContent = async (movie) => {
   });
 
   const commentButton = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0];
-  commentButton.addEventListener('click', (e) => {
-    const movieId = e.target.getAttribute('data-id');
-    displayCommentPopup(movieId);
+  commentButton.addEventListener('click', async (e) => {
+    const commentObject =  {
+      item_id: Number(e.target.getAttribute('comment-id')),
+      username: commentButton.previousElementSibling.previousElementSibling.value,
+      comment: commentButton.previousElementSibling.value
+    }
+    
+    const result = await createComment(commentObject);
+    console.log(result);
+
+    //if (result === 201) {
+      // "refresh" the comments section
+    //}
   });
 };
 
