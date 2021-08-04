@@ -1,11 +1,21 @@
 import { getMovies } from './moviesApi.js';
 import { displayCommentPopup } from './comments.js';
+import { addLike, getLikes } from './likes_api.js';
+
   
   const displayMovies = async () => {
     const movies = await getMovies();
     const movieList = document.getElementById('movie-list');
     movieList.innerHTML = "";
-    movies.forEach((movie) => {
+    for (const movie of movies) {
+      const likes = await getLikes(movie.show.id);
+      const likeObject = likes.filter(like => like.item_id === movie.show.id);
+      console.log(likeObject);
+      let numberOfLikes = '';
+      if (likeObject.length > 0) {
+        console.log(likeObject[0].likes);
+        numberOfLikes = `${likeObject[0].likes} likes`;
+      }
       let image = movie.show.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
       movieList.insertAdjacentHTML('beforeend', ` 
       <div class="movie-list-container">
@@ -14,7 +24,7 @@ import { displayCommentPopup } from './comments.js';
         </div>
           <div>
             <h2>${movie.show.name}</h2>
-            <button like-btn="${movie.show.id}" class="btn-likes"><i class="fas fa-heart"></i></button>
+            <p>${numberOfLikes}</p>
           </div>
           <button data-id="${movie.show.id}" class="btn-comments">Comments</button>
       </div>`
@@ -23,15 +33,8 @@ import { displayCommentPopup } from './comments.js';
       button.addEventListener('click', (e) => {
         const movieId = e.target.getAttribute('data-id');
         displayCommentPopup(movieId);
-        
       });
-      const like_btn = document.querySelectorAll(`[like-btn="${movie.show.id}"]`)[0];
-      like_btn.addEventListener('click', (e) => {
-        const movieId = e.target.getAttribute('like-btn');
-        displayCommentPopup(movieId);
-        
-      });
-    });
+    };
   }
 
   export { displayMovies };
