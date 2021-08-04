@@ -72,9 +72,17 @@ const generatePopupContent = async (movie) => {
         .parentElement.previousElementSibling;
       const date = lastComment.creation_date.split('-');
       const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
-      commentsDisplay.insertAdjacentHTML('beforeend', `
-        <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
-      `);
+      
+      if (comments.length === 1) {
+        commentsDisplay.insertAdjacentHTML('beforeend', `
+          <h3>Comments</h3>
+          <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
+        `);
+      } else {
+        commentsDisplay.insertAdjacentHTML('beforeend', `
+          <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
+        `);
+      }
     }
   });
 };
