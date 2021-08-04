@@ -1,5 +1,5 @@
 import { getMovies } from './moviesApi.js';
-import { displayCommentPopup } from './comments.js';
+import displayCommentPopup from './comments.js';
 
 const displayMovies = async () => {
   const movies = await getMovies();
@@ -25,4 +25,4 @@ const displayMovies = async () => {
   });
 };
 
-export { displayMovies };
+export default displayMovies;

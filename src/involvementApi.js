@@ -8,7 +8,7 @@ const createComment = async (obj) => {
     username: obj.username,
     comment: obj.comment,
   };
-  console.log(commentBody);
+
   const results = await fetch(commentsURL, {
     method: 'POST',
     headers: {
@@ -24,7 +24,7 @@ const getComments = async (id) => {
   const result = await fetch(`${commentsURL}?item_id=${id}`);
 
   const comments = await result.json();
-  console.log(comments.error?.status);
+
   if (comments.error?.status === 500 || comments.error?.status === 400) {
     return [];
   }

@@ -11,7 +11,7 @@ const generatePopupContent = async (movie) => {
   const comments = await getComments(movieId);
 
   let commentBlock = '';
-  
+
   if (comments.length > 0) {
     commentBlock += '<h3>Comments</h3>';
     comments.forEach((comment) => {
@@ -20,7 +20,7 @@ const generatePopupContent = async (movie) => {
       commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
     });
   }
-  
+
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
       <div class="inner-content">
@@ -57,12 +57,12 @@ const generatePopupContent = async (movie) => {
 
   const commentButton = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0];
   commentButton.addEventListener('click', async (e) => {
-    const commentObject =  {
+    const commentObject = {
       item_id: Number(e.target.getAttribute('comment-id')),
       username: commentButton.previousElementSibling.previousElementSibling.value,
-      comment: commentButton.previousElementSibling.value
-    }
-    
+      comment: commentButton.previousElementSibling.value,
+    };
+
     const result = await createComment(commentObject);
 
     if (result === 201) {
@@ -84,4 +84,4 @@ const displayCommentPopup = async (id) => {
   generatePopupContent(movie);
 };
 
-export { displayCommentPopup };
+export default displayCommentPopup;
