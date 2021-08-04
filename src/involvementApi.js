@@ -4,9 +4,9 @@ const commentsURL = `https://us-central1-involvement-api.cloudfunctions.net/caps
 
 const createComment = async (obj) => {
   const commentBody = {
-    "item_id": obj.item_id,
-    "username": obj.username,
-    "comment": obj.comment,
+    item_id: obj.item_id,
+    username: obj.username,
+    comment: obj.comment,
   };
   console.log(commentBody);
   const results = await fetch(commentsURL, {
@@ -17,9 +17,7 @@ const createComment = async (obj) => {
     body: JSON.stringify(commentBody),
   });
 
-  const status = await results.json();
-  console.log(status);
-  return status;
+  return results.status;
 };
 
 const getComments = async (id) => {

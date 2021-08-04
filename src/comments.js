@@ -15,8 +15,8 @@ const generatePopupContent = async (movie) => {
   if (comments.length > 0) {
     commentBlock += '<h3>Comments</h3>';
     comments.forEach((comment) => {
-      const date = new Date();
-      const dateFormated = `${(date.getMonth() + 1)}/${date.getDate()}/${date.getFullYear()}`;
+      const date = comment.creation_date.split('-');
+      const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
       commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
     });
   }
