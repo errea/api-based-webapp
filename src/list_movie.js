@@ -14,6 +14,7 @@ import { displayCommentPopup } from './comments.js';
         </div>
           <div>
             <h2>${movie.show.name}</h2>
+            <button like-btn="${movie.show.id}" class="btn-likes"><i class="fas fa-heart"></i></button>
           </div>
           <button data-id="${movie.show.id}" class="btn-comments">Comments</button>
       </div>`
