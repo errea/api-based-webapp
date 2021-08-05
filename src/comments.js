@@ -24,8 +24,9 @@ const updateCommentTitle = (id) => {
 };
 
 const generatePopupContent = async (movie) => {
-  const popup = document.getElementById('popup');
-  document.body.style.backgroundColor = 'rgba(0,0,0,0.6)';
+  const popup = document.createElement('div');
+  popup.classList.add('popup');
+
   popup.innerHTML = '';
   const image = movie.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
 
@@ -61,11 +62,10 @@ const generatePopupContent = async (movie) => {
         </div>
       </div>
     </div>`);
-  popup.style.display = 'block';
+  document.querySelector('main').appendChild(popup);
   const closeButton = document.getElementsByClassName('close-popup')[0];
   closeButton.addEventListener('click', () => {
-    popup.style.display = 'none';
-    document.body.style.backgroundColor = 'rgba(0,0,0,0)';
+    document.querySelector('.popup').remove();
   });
 
   const commentsDisplay = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0]
