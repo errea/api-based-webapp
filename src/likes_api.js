@@ -13,9 +13,8 @@ export const addLike = async (id) => {
     },
     body: JSON.stringify(likeBody),
   });
-  
-  const status = await results.json();
-  return status;
+
+  return response;
 };
 
 export const getLikes = async (id) => {
@@ -27,4 +26,3 @@ export const getLikes = async (id) => {
   }
   return likes;
 };
-  

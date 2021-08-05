@@ -1,6 +1,28 @@
 import { getMovieById } from './moviesApi.js';
 import { getComments, createComment } from './involvementApi.js';
 
+const calculateCommentsNumber = (commentId) => {
+  const commentsContent = document.querySelectorAll(`[comment-id="${commentId}"]`)[0]
+    .parentElement.previousElementSibling.children;
+
+  const commentsCount = [...commentsContent].filter((elem) => elem.nodeName === 'P').length;
+
+  return commentsCount;
+};
+
+const updateCommentTitle = (id) => {
+  const numberOfComments = calculateCommentsNumber(id);
+
+  const commentsContent = document.querySelectorAll(`[comment-id="${id}"]`)[0]
+    .parentElement.previousElementSibling.children;
+
+  if (commentsContent.length > 0) {
+    const commentTitle = [...commentsContent].filter((elem) => elem.nodeName === 'H3')[0];
+
+    commentTitle.innerText = `Comments (${numberOfComments})`;
+  }
+};
+
 const generatePopupContent = async (movie) => {
   const popup = document.getElementById('popup');
   document.body.style.backgroundColor = 'rgba(0,0,0,0.6)';
@@ -47,10 +69,10 @@ const generatePopupContent = async (movie) => {
   });
 
   const commentsDisplay = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0]
-    .parentElement.previousElementSibling;  
-  
+    .parentElement.previousElementSibling;
+
   if (comments.length > 0) {
-    commentBlock += `<h3>Comments</h3>`;
+    commentBlock += '<h3>Comments</h3>';
     comments.forEach((comment) => {
       const date = comment.creation_date.split('-');
       const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
@@ -78,7 +100,7 @@ const generatePopupContent = async (movie) => {
         .parentElement.previousElementSibling;
       const date = lastComment.creation_date.split('-');
       const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
-      
+
       if (comments.length === 1) {
         commentsDisplay.insertAdjacentHTML('beforeend', `
           <h3>Comments</h3>
@@ -98,28 +120,5 @@ const displayCommentPopup = async (id) => {
   const movie = await getMovieById(id);
   generatePopupContent(movie);
 };
-
-const calculateCommentsNumber = (commentId) => { 
-  const commentsContent = document.querySelectorAll(`[comment-id="${commentId}"]`)[0]
-    .parentElement.previousElementSibling.children;
-  
-  const commentsCount = [...commentsContent].filter(elem => elem.nodeName === "P").length;
-
-  return commentsCount;
-}
-
-const updateCommentTitle = (id) => {
-  const numberOfComments = calculateCommentsNumber(id);
-
-  const commentsContent = document.querySelectorAll(`[comment-id="${id}"]`)[0]
-    .parentElement.previousElementSibling.children;
-  
-  if (commentsContent.length > 0) {
-    const commentTitle = [...commentsContent].filter(elem => elem.nodeName === "H3")[0];
-
-    commentTitle.innerText = `Comments (${numberOfComments})`;
-  }  
-  
-}
 
 export default displayCommentPopup;

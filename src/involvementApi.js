@@ -23,11 +23,11 @@ const createComment = async (obj) => {
 const getComments = async (id) => {
   try {
     const result = await fetch(`${commentsURL}?item_id=${id}`);
-    
+
     const comments = await result.json();
-    
+
     return comments;
-  } catch(error) {
+  } catch (error) {
     return [];
   }
 };
