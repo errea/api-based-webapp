@@ -59,15 +59,26 @@ describe('Comments adding feature', () => {
  
   //  Act --------------------------------------------------------------------------->
 
-  // updateCommentTitle(40955);
-
   const checkNumberOfComments = (id) => {
     return calculateCommentsNumber(id);
   }
 
-
+  const addComment = () => {
+    console.log(document.body);
+    const commentsDisplay = document.getElementsByClassName('comments-display')[0];
+    commentsDisplay.insertAdjacentHTML('beforeend', `
+      <p>08/05/2021 Arthur: This is my first comment!</p>
+    `); 
+  }
+  
   //  Assert --------------------------------------------------------------------------->
   test('if has 0 comments on initialization', () => {
     expect(checkNumberOfComments(40955)).toBe(0);
+  });
+
+  test('it should show 1 comment upon addition', () => {
+    addComment();
+    updateCommentTitle(40955);
+    expect(checkNumberOfComments(40955)).toBe(1);
   });
 });
