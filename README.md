@@ -50,8 +50,7 @@ The application make API calls to the TVMAZE API retrieving information about th
 ## Getting Started <a name = "gs"></a>
 > To get a local copy up and running follow these simple example steps.
 
-<details>
-  <summary>Get instructions</summary>
+### Get instructions
 
 ```
 $ cd <folder>
@@ -68,21 +67,31 @@ Run `npm run build` to build the bundler and build the webpack.
 
 Run `npm run start` on a Terminal to start the server and look at the result in `http://localhost:8080/` in your browser.
 
-</details>
 
 
-## Information regarding the TVMAZE API
 
-- For this exercise, a previous app was created in Insomnia
-- This process yielded the id of `6XTY5c5cttB49FIPrzzY` which was hardcoded in the code
 
 ## API Information
 
 ### TVMAZE API
 
+- For getting the list of movies, the [TVMAZE API](https://www.tvmaze.com/api#show-search) was used.
+
+- Two methods were implemented: To get a list of action movies, and to get a single movie.
+
+- The base URL for searching the action movies is: `https://api.tvmaze.com/search/shows?q=action`.
+
+- The base URL for getting information for a single movie is `'https://api.tvmaze.com/shows/' + id;` where id is the id of the movie.
+
+- The result of calling this API is an array containing several fields which can be queried using dot notation.
+
 ### Involvement API
 
 - This application uses the [Involvement API service](https://www.notion.so/Involvement-API-869e60b5ad104603aa6db59e08150270) provided by Microverse
+
+- For this exercise, a previous app was created in Insomnia
+
+- This process yielded the id of `6XTY5c5cttB49FIPrzzY` which was hardcoded in the code as the :app_id that you will see below.
 
 - The base URL is `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/`
 
