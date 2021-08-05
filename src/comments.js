@@ -114,9 +114,12 @@ const updateCommentTitle = (id) => {
   const commentsContent = document.querySelectorAll(`[comment-id="${id}"]`)[0]
     .parentElement.previousElementSibling.children;
   
-  const commentTitle = [...commentsContent].filter(elem => elem.nodeName === "H3")[0];
+  if (commentsContent.length > 0) {
+    const commentTitle = [...commentsContent].filter(elem => elem.nodeName === "H3")[0];
 
-  commentTitle.innerText = `Comments (${numberOfComments})`;
+    commentTitle.innerText = `Comments (${numberOfComments})`;
+  }  
+  
 }
 
 export default displayCommentPopup;
