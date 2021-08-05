@@ -12,8 +12,8 @@ export const addLike = async (id) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(likeBody),
-  })
-  
+  });
+
   return response.status;
 };
 
