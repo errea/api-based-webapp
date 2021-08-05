@@ -12,7 +12,7 @@ const updateMovieTitle = (count) => {
   movieTitle.innerText = `Movies (${count})`;
 };
 
-export const displayMovies = async () => {
+const displayMovies = async () => {
   const movies = await getMovies();
   const movieList = document.getElementById('movie-list');
   movieList.innerHTML = '';
@@ -46,13 +46,10 @@ export const displayMovies = async () => {
       const movieId = e.target.parentElement.parentElement.getAttribute('like-id');
       const status = await addLike(Number(movieId));
       const newLikes = await getLikes(movieId);
-      console.log(newLikes);
       const newLikesObject = newLikes.filter((like) => like.item_id === movie.show.id);
       const numberOfLikes = `${newLikesObject[0].likes} likes`;
-      console.log(numberOfLikes);
       if (status === 201) {
         const likeDisplay = likeBtn.previousElementSibling.previousElementSibling.children[1];
-        console.log(likeDisplay);
         likeDisplay.innerText = numberOfLikes;
       }
     });
@@ -60,3 +57,5 @@ export const displayMovies = async () => {
   const movieCount = getCountMovies();
   updateMovieTitle(movieCount);
 };
+
+export default displayMovies;
