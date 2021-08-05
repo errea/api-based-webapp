@@ -17,12 +17,10 @@ export const addLike = async (id) => {
   return response.status;
 };
 
-export const getLikes = async (id) => {
-  const result = await fetch(`${baseUrl}${likeEndpoint}?item_id=${id}`);
+export const getLikes = async () => {
+  const result = await fetch(`${baseUrl}${likeEndpoint}`);
 
   const likes = await result.json();
-  if (likes.error?.status === 500 || likes.error?.status === 400) {
-    return [];
-  }
+
   return likes;
 };

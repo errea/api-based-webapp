@@ -14,17 +14,18 @@ const updateMovieTitle = (count) => {
 
 const displayMovies = async () => {
   const movies = await getMovies();
+  const likes = await getLikes();
+
   const movieList = document.getElementById('movie-list');
   movieList.innerHTML = '';
-  /* eslint-disable no-await-in-loop */
   for (let i = 0; i < movies.length; i += 1) {
-  // for (const movie of movies) {
-    const likes = await getLikes(movies[i].show.id);
     const likeObject = likes.filter((like) => like.item_id === movies[i].show.id);
+
     let numberOfLikes = '';
     if (likeObject.length > 0) {
       numberOfLikes = `${likeObject[0].likes} likes`;
     }
+
     const image = movies[i].show.image?.medium ?? 'https://i.ibb.co/nPzyFm6/placeholder.png';
     movieList.insertAdjacentHTML('beforeend', ` 
       <div class="movie-list-container">
@@ -43,6 +44,7 @@ const displayMovies = async () => {
       const movieId = e.target.getAttribute('data-id');
       displayCommentPopup(movieId);
     });
+
     const likeBtn = document.querySelectorAll(`[like-id="${movies[i].show.id}"]`)[0];
     likeBtn.addEventListener('click', async (e) => {
       const movieId = e.target.parentElement.parentElement.getAttribute('like-id');
