@@ -4,8 +4,8 @@ const likeEndpoint = 'apps/6XTY5c5cttB49FIPrzzY/likes/';
 export const addLike = async (id) => {
   const likeBody = {
     item_id: id,
-  };    
-  
+  };
+
   const response = await fetch(`${baseUrl}${likeEndpoint}`, {
     method: 'POST',
     headers: {
@@ -17,12 +17,10 @@ export const addLike = async (id) => {
   return response.status;
 };
 
-export const getLikes = async (id) => {
-  const result = await fetch(`${baseUrl}${likeEndpoint}?item_id=${id}`);
+export const getLikes = async () => {
+  const result = await fetch(`${baseUrl}${likeEndpoint}`);
 
   const likes = await result.json();
-  if (likes.error?.status === 500 || likes.error?.status === 400) {
-    return [];
-  }
+
   return likes;
 };
