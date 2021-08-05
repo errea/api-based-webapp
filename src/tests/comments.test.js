@@ -1,8 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { expect, test } = require('@jest/globals');
-
 describe('Comments adding feature', () => {
   // Arrange --------------------------------------------------------------------------->
   document.body.innerHTML = `
@@ -37,48 +35,42 @@ describe('Comments adding feature', () => {
   const calculateCommentsNumber = (commentId) => {
     const commentsContent = document.querySelectorAll(`[comment-id="${commentId}"]`)[0]
       .parentElement.previousElementSibling.children;
-  
+
     const commentsCount = [...commentsContent].filter((elem) => elem.nodeName === 'P').length;
-  
+
     return commentsCount;
   };
-  
+
   const updateCommentTitle = (id) => {
     const numberOfComments = calculateCommentsNumber(id);
-  
+
     const commentsContent = document.querySelectorAll(`[comment-id="${id}"]`)[0]
       .parentElement.previousElementSibling.children;
-  
+
     if (commentsContent.length > 0) {
       const commentTitle = [...commentsContent].filter((elem) => elem.nodeName === 'H3')[0];
-  
+
       commentTitle.innerText = `Comments (${numberOfComments})`;
     }
   };
-   
- 
+
   //  Act --------------------------------------------------------------------------->
 
-  const checkNumberOfComments = (id) => {
-    return calculateCommentsNumber(id);
-  }
-
   const addComment = () => {
-    console.log(document.body);
     const commentsDisplay = document.getElementsByClassName('comments-display')[0];
     commentsDisplay.insertAdjacentHTML('beforeend', `
       <p>08/05/2021 Arthur: This is my first comment!</p>
-    `); 
-  }
-  
+    `);
+  };
+
   //  Assert --------------------------------------------------------------------------->
   test('if has 0 comments on initialization', () => {
-    expect(checkNumberOfComments(40955)).toBe(0);
+    expect(calculateCommentsNumber(40955)).toBe(0);
   });
 
   test('it should show 1 comment upon addition', () => {
     addComment();
     updateCommentTitle(40955);
-    expect(checkNumberOfComments(40955)).toBe(1);
+    expect(calculateCommentsNumber(40955)).toBe(1);
   });
 });
