@@ -1,6 +1,28 @@
 import { getMovieById } from './moviesApi.js';
 import { getComments, createComment } from './involvementApi.js';
 
+const calculateCommentsNumber = (commentId) => {
+  const commentsContent = document.querySelectorAll(`[comment-id="${commentId}"]`)[0]
+    .parentElement.previousElementSibling.children;
+
+  const commentsCount = [...commentsContent].filter((elem) => elem.nodeName === 'P').length;
+
+  return commentsCount;
+};
+
+const updateCommentTitle = (id) => {
+  const numberOfComments = calculateCommentsNumber(id);
+
+  const commentsContent = document.querySelectorAll(`[comment-id="${id}"]`)[0]
+    .parentElement.previousElementSibling.children;
+
+  if (commentsContent.length > 0) {
+    const commentTitle = [...commentsContent].filter((elem) => elem.nodeName === 'H3')[0];
+
+    commentTitle.innerText = `Comments (${numberOfComments})`;
+  }
+};
+
 const generatePopupContent = async (movie) => {
   const popup = document.getElementById('popup');
   document.body.style.backgroundColor = 'rgba(0,0,0,0.6)';
@@ -11,15 +33,6 @@ const generatePopupContent = async (movie) => {
   const comments = await getComments(movieId);
 
   let commentBlock = '';
-
-  if (comments.length > 0) {
-    commentBlock += '<h3>Comments</h3>';
-    comments.forEach((comment) => {
-      const date = comment.creation_date.split('-');
-      const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
-      commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
-    });
-  }
 
   popup.insertAdjacentHTML('beforeend', ` 
     <div class="popup-container">
@@ -55,6 +68,21 @@ const generatePopupContent = async (movie) => {
     document.body.style.backgroundColor = 'rgba(0,0,0,0)';
   });
 
+  const commentsDisplay = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0]
+    .parentElement.previousElementSibling;
+
+  if (comments.length > 0) {
+    commentBlock += '<h3>Comments</h3>';
+    comments.forEach((comment) => {
+      const date = comment.creation_date.split('-');
+      const dateFormated = `${date[1]}/${date[2]}/${date[0]}`;
+      commentBlock += `<p>${dateFormated} ${comment.username}: ${comment.comment}</p>`;
+    });
+  }
+  commentsDisplay.insertAdjacentHTML('beforeend', commentBlock);
+
+  updateCommentTitle(movie.id);
+
   const commentButton = document.querySelectorAll(`[comment-id="${movie.id}"]`)[0];
   commentButton.addEventListener('click', async (e) => {
     const commentObject = {
@@ -83,6 +111,7 @@ const generatePopupContent = async (movie) => {
           <p>${dateFormated} ${lastComment.username}: ${lastComment.comment}</p>
         `);
       }
+      updateCommentTitle(movie.id);
     }
   });
 };
