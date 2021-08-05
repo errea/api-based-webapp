@@ -53,9 +53,9 @@ body {
   position: fixed;
   border: 2px solid black;
   left: calc(50% - 350px);
-  height: 700px;
+  height: 550px;
   width: 700px;
-  margin: 15px;
+  margin: 20px;
   padding: 25px;
   display: flex;
   justify-content: center;
