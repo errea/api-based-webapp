@@ -78,82 +78,81 @@ Run `npm run start` on a Terminal to start the server and look at the result in 
 
 ## API Information
 
+### TVMAZE API
+
+### Involvement API
+
 - This application uses the [Involvement API service](https://www.notion.so/Involvement-API-869e60b5ad104603aa6db59e08150270) provided by Microverse
 
 - The base URL is `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/`
 
 - It has basically 3 endpoints that were used, `/apps/` (to create the application), `/apps/:app_id/likes/` (to create and get likes) and `/apps/:app_id/comments` (To create and get comments)
 
-- To create a game, send a POST action to the base URL + `/apps/` without any parameter:
+#### New app
 
-```
-{
-  "name": "This is the name of the new game" 
-}
-```
+- To create a app, send a POST action to the base URL + `/apps/` without any parameter:
 
-- The result will be something like: 
+- The result will be the code for the further API calls: 
+
 ``` 
-{
-	"result": "Game with ID: Zl4d7IVkemOTTVg2fUdz added."
-}
+6XTY5c5cttB49FIPrzzY
 ``` 
 
-- To create a new score, send a POST action to the base URL + `/games/:id/scores/` (where id is the previous id of the created game) and the score and user name:
+#### Likes
+
+- To create a new like, send a POST action to the base URL + `/apps/:app_id/likes/` (where :app_id is the previous id of the created game) and item identificator (we choose the id of the movie in TVMAZE API, to make the implementation easier):
 
 ```
 {
-  "user": "Arthur"
-  "score": 42 
+  "item_id": 40995
 }
 ```
 
-- To get a list of all scores for a specific game, send a GET action to the base URL + `/games/:id/scores/`:
+- To get a list of all likes for all the items (movies), send a GET action to the base URL + `/apps/:app_id/likes/`:
 
 - The response will be something like:
 
 ```
-{
-  "result": [
-    {
-      "user": "John Doe",
-      "score": 42
-    },
-    {
-      "user": "Peter Parker",
-      "score": 35
-    },
-    {
-      "user": "Wonder Woman",
-      "score": 50
-    }
-  ]
-}
+[
+  {
+    "likes": 18,
+    "item_id": 40995
+  }
+]
 ``` 
 
-## Project Structure
+#### Comments
 
-    WebApp API
-    ├── dist
-    │   └── index.bundle.js
-        └── index.html
-    └── node_modules
-    └── .github\workflows
-        └── linters.yml
-    └── src
-        └── /img
-      └── index.html
-      └── index.js   
-      └── style.css
-    └── .eslintrc.json
-    └── .gitignore
-    └── .hintrc
-    └──.stylelintrc.json
-    └── MIT.md
-    └── package-lock.json
-    └── package.json
-    └──README.md
-    └── webpack.config.js
+- To create a new comment, send a POST action to the base URL + `/apps/:app_id/comments/` (where :app_id is the previous id of the created game) and item identificator (we choose the id of the movie in TVMAZE API, to make the implementation easier):
+
+```
+{
+  "item_id": 40995,
+  "username": "Arthur",
+  "comment": "This was a great movie!"
+}
+```
+
+Return value for POST action: `201` status (created)
+
+- To get a list of all comments for all the items (movies), send a GET action to the base URL + `/apps/:app_id/comments/?item_id=item1`: (where item1 is 40995, the id of the movie)
+
+- The response will be something like:
+
+```
+[
+  {
+    "comment": "This is nice!",
+    "creation_date": "2021-01-10",
+    "username": "Eri"
+  },
+  {
+    "comment": "Great content!",
+    "creation_date": "2021-02-10",
+    "username": "Arthur"
+  }
+]
+``` 
 
 ## ✒️  Authors <a name = "author"></a>
 
@@ -186,5 +185,3 @@ Feel free to check the [issues page](https://github.com/errea/api-based-webapp/i
 ## 📝 License
 
 This project is MIT licensed.
-
-
