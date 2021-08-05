@@ -21,14 +21,15 @@ const createComment = async (obj) => {
 };
 
 const getComments = async (id) => {
-  const result = await fetch(`${commentsURL}?item_id=${id}`);
+  try {
+    const result = await fetch(`${commentsURL}?item_id=${id}`);
 
-  const comments = await result.json();
+    const comments = await result.json();
 
-  if (comments.error?.status === 500 || comments.error?.status === 400) {
+    return comments;
+  } catch (error) {
     return [];
   }
-  return comments;
 };
 
 export { createComment, getComments };
