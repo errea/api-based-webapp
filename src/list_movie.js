@@ -16,6 +16,7 @@ const displayMovies = async () => {
   const movies = await getMovies();
   const movieList = document.getElementById('movie-list');
   movieList.innerHTML = '';
+  /* eslint-disable no-await-in-loop */
   for (const movie of movies) {
     const likes = await getLikes(movie.show.id);
     const likeObject = likes.filter((like) => like.item_id === movie.show.id);
