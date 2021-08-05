@@ -24,7 +24,7 @@ const displayMovies = async () => {
     if (likeObject.length > 0) {
       numberOfLikes = `${likeObject[0].likes} likes`;
     }
-    const image = movie.show.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
+    const image = movie.show.image?.medium ?? 'https://i.ibb.co/nPzyFm6/placeholder.png';
     movieList.insertAdjacentHTML('beforeend', ` 
       <div class="movie-list-container">
         <div class="movie-listcontent">

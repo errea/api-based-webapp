@@ -28,7 +28,7 @@ const generatePopupContent = async (movie) => {
   popup.classList.add('popup');
 
   popup.innerHTML = '';
-  const image = movie.image?.medium ?? 'https://ultimateactionmovies.com/wp-content/uploads/2021/07/Eliminators-696x392.jpeg';
+  const image = movie.image?.medium ?? 'https://i.ibb.co/nPzyFm6/placeholder.png';
 
   const movieId = movie.id;
   const comments = await getComments(movieId);
