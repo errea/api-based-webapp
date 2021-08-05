@@ -38,13 +38,6 @@ body {
   position: absolute;
 }
 
-/*
-#popup {
-  position: relative;
-  z-index: 10;
-}
-*/
-
 .popup {
   position: fixed;
   top: 0;
@@ -56,12 +49,18 @@ body {
 }
 
 .popup-container {
+  overflow-y: scroll;
+  position: fixed;
   border: 2px solid black;
+  left: calc(50% - 350px);
+  height: 700px;
+  width: 700px;
   margin: 15px;
   padding: 25px;
   display: flex;
   justify-content: center;
   background-color: white;
+  z-index: 20;
 }
 
 .photo-close {
@@ -100,7 +99,7 @@ input[name="username"] {
 }
 
 .btn-add-comment {
-  margin-top: 20px;
+  margin: 20px 0;
   align-self: flex-end;
 }
 
