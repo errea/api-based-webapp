@@ -51,3 +51,14 @@ import { addLike, getLikes } from './likes_api.js';
     };
   }
 
+  function countNumLikes(movieId) {
+    let result = 0
+    if (el.children && el.children.length > 0) {
+      result = result + el.children.length
+      for (let i = 0; i < el.children.length; i++) {
+        result = result + countNumLikes(el.children[i])
+      }
+    }
+    return result
+  }
+
