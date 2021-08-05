@@ -35,7 +35,7 @@ const displayMovies = async () => {
             <p>${numberOfLikes}</p>
           </div>
           <button data-id="${movie.show.id}" class="btn-comments">Comments</button>
-          <button like-id="${movie.show.id}" class="btn-likes"><i class="fas fa-heart"></i></button>
+          <span like-id="${movie.show.id}" class="btn-likes"><i class="fas fa-heart fa-lg"></i></span>
       </div>`);
     const button = document.querySelectorAll(`[data-id="${movie.show.id}"]`)[0];
     button.addEventListener('click', (e) => {

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: ;
+  font-family: 'Vollkorn', serif;
 }
 
 header {
@@ -41,6 +41,11 @@ header {
 
 .movie-list-container {
   margin: 25px;
+}
+
+.btn-likes {
+  margin-left: 10px;
+  color: red;
 }
 
 /* ---------- Popup ----------- */
@@ -116,6 +121,8 @@ input[name="username"] {
   margin: 20px 0;
   align-self: flex-end;
 }
+
+/* ------------------ Footer ------- */
 
 footer {
   bottom: 0;
