@@ -1,0 +1,47 @@
+{
+  "name": "api-based-webapp",
+  "version": "1.0.0",
+  "description": "This is a JavaScript capstone project  that is about building a web application based on an external API.",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "test": "jest",
+    "start": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/errea/api-based-webapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/errea/api-based-webapp/issues"
+  },
+  "homepage": "https://github.com/errea/api-based-webapp#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.9",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^27.0.6",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "hint": "^6.1.4",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.0.6",
+    "style-loader": "^3.2.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "^3.20.1",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4"
+  }
+}
